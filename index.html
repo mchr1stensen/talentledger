@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Talent Ledger — Workforce, Business & Agency Advisory</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --amber:       #E8610A;
+    --amber-deep:  #C44E05;
+    --amber-light: #F5884A;
+    --amber-pale:  #FDF0E8;
+    --charcoal:    #1C1C1C;
+    --slate:       #3D3D3D;
+    --mid:         #6B6B6B;
+    --stone:       #B5AFA9;
+    --fog:         #F2EDE8;
+    --white:       #FAFAF8;
+    --font-display: 'Syne', sans-serif;
+    --font-body:    'DM Sans', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--fog);
+    color: var(--charcoal);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 64px;
+    height: 72px;
+    background: rgba(28,28,28,0.97);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .nav-logo {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 20px;
+    color: var(--white);
+    letter-spacing: -0.01em;
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--amber); }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 13.5px;
+    font-weight: 400;
+    color: var(--stone);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--white); }
+  .nav-links li a.nav-cta {
+    display: inline-block;
+    background: var(--amber);
+    color: var(--white);
+    padding: 9px 22px;
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 13.5px;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    transition: background 0.2s;
+    line-height: 1;
+  }
+  .nav-links li a.nav-cta:hover {
+    background: var(--amber-deep);
+    color: var(--white);
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: var(--charcoal);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 140px 64px 120px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(232,97,10,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(232,97,10,0.04) 1px, transparent 1px);
+    background-size: 80px 80px;
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: -140px; right: -140px;
+    width: 700px; height: 700px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(232,97,10,0.15) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .hero-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 860px;
+  }
+  .hero-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--amber-light);
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    animation: fadeUp 0.6s ease both 0.1s;
+  }
+  .hero-label::before {
+    content: '';
+    display: inline-block;
+    width: 28px; height: 1px;
+    background: var(--amber);
+  }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(46px, 6.5vw, 86px);
+    line-height: 1.0;
+    color: var(--white);
+    letter-spacing: -0.02em;
+    margin-bottom: 32px;
+    animation: fadeUp 0.6s ease both 0.2s;
+  }
+  .hero h1 em { font-style: normal; color: var(--amber); }
+  .hero-sub {
+    font-size: clamp(17px, 2vw, 20px);
+    font-weight: 300;
+    color: var(--stone);
+    line-height: 1.7;
+    max-width: 580px;
+    margin-bottom: 52px;
+    animation: fadeUp 0.6s ease both 0.35s;
+  }
+  .hero-sub strong { color: var(--white); font-weight: 400; }
+
+  /* ── SERVICE LINE CARDS IN HERO ── */
+  .hero-services {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    max-width: 860px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: rgba(255,255,255,0.04);
+    animation: fadeUp 0.6s ease both 0.5s;
+  }
+  .hero-service-card {
+    background: rgba(255,255,255,0.04);
+    padding: 32px 28px;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: background 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-service-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--amber);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.25s ease;
+  }
+  .hero-service-card:hover { background: rgba(232,97,10,0.08); }
+  .hero-service-card:hover::after { transform: scaleX(1); }
+
+  .hsc-number {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    color: var(--amber);
+    text-transform: uppercase;
+  }
+  .hsc-title {
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.25;
+  }
+  .hsc-body {
+    font-size: 13px;
+    color: var(--stone);
+    font-weight: 300;
+    line-height: 1.6;
+    flex: 1;
+  }
+  .hsc-link {
+    font-size: 12px;
+    color: var(--amber-light);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 4px;
+    transition: gap 0.2s;
+  }
+  .hero-service-card:hover .hsc-link { gap: 9px; }
+
+  .hero-rule {
+    position: absolute;
+    bottom: 0; left: 64px; right: 64px;
+    height: 1px;
+    background: linear-gradient(to right, var(--amber), transparent 60%);
+    opacity: 0.35;
+  }
+
+  /* ── CREDIBILITY STRIP ── */
+  .cred-strip {
+    background: var(--white);
+    padding: 52px 64px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .cred-item {
+    padding: 0 36px;
+    border-right: 1px solid rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .cred-item:first-child { padding-left: 0; }
+  .cred-item:last-child { border-right: none; }
+  .cred-number {
+    font-family: var(--font-display);
+    font-size: 36px;
+    font-weight: 800;
+    color: var(--amber);
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+  .cred-label {
+    font-size: 13px;
+    color: var(--mid);
+    font-weight: 300;
+    line-height: 1.5;
+  }
+
+  /* ── SECTION SHARED ── */
+  .section-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 14px;
+  }
+  .section-heading {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(30px, 3.5vw, 46px);
+    color: var(--charcoal);
+    letter-spacing: -0.02em;
+    line-height: 1.08;
+    margin-bottom: 20px;
+  }
+  .section-body {
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--slate);
+    line-height: 1.75;
+    max-width: 560px;
+  }
+  .link-arrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 14px;
+    color: var(--amber);
+    font-weight: 500;
+    text-decoration: none;
+    margin-top: 28px;
+    transition: gap 0.2s;
+  }
+  .link-arrow:hover { gap: 12px; }
+
+  /* ── SERVICE LINE 1: WORKFORCE TECH ── */
+  .sl1 {
+    padding: 112px 64px;
+    background: var(--fog);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .sl1-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .sl1-card {
+    background: var(--white);
+    padding: 28px 32px;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    transition: background 0.2s;
+  }
+  .sl1-card:hover { background: var(--amber-pale); }
+  .sl1-card-num {
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--amber);
+    padding-top: 3px;
+    min-width: 24px;
+  }
+  .sl1-card-title {
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--charcoal);
+    margin-bottom: 6px;
+  }
+  .sl1-card-body {
+    font-size: 13.5px;
+    color: var(--mid);
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  /* ── SERVICE LINE 2: BUSINESS ADVISORY ── */
+  .sl2 {
+    padding: 112px 64px;
+    background: var(--charcoal);
+    position: relative;
+    overflow: hidden;
+  }
+  .sl2::before {
+    content: '';
+    position: absolute;
+    bottom: -100px; right: -100px;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(232,97,10,0.1) 0%, transparent 70%);
+  }
+  .sl2-inner {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .sl2 .section-label { color: var(--amber-light); }
+  .sl2 .section-heading { color: var(--white); }
+  .sl2 .section-body { color: var(--stone); }
+  .sl2 .link-arrow { color: var(--amber-light); }
+
+  .sl2-pillars {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .sl2-pillar {
+    background: rgba(255,255,255,0.05);
+    padding: 28px 24px;
+    transition: background 0.2s;
+  }
+  .sl2-pillar:hover { background: rgba(232,97,10,0.1); }
+  .sl2-pillar-icon {
+    font-size: 22px;
+    margin-bottom: 12px;
+  }
+  .sl2-pillar-title {
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+  .sl2-pillar-body {
+    font-size: 13px;
+    color: var(--stone);
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  /* ── SERVICE LINE 3: AGENCY GROWTH ── */
+  .sl3 {
+    padding: 112px 64px;
+    background: var(--white);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .sl3-right {}
+  .sl3-checklist {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border: 1px solid rgba(0,0,0,0.07);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .sl3-check {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 22px 28px;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    transition: background 0.2s;
+  }
+  .sl3-check:last-child { border-bottom: none; }
+  .sl3-check:hover { background: var(--amber-pale); }
+  .sl3-check-mark {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--amber-pale);
+    color: var(--amber);
+    font-size: 12px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .sl3-check-title {
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--charcoal);
+    margin-bottom: 4px;
+  }
+  .sl3-check-body {
+    font-size: 13.5px;
+    color: var(--mid);
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  /* ── WHO WE WORK WITH ── */
+  .who {
+    padding: 96px 64px;
+    background: var(--fog);
+    text-align: center;
+  }
+  .who .section-heading { margin: 0 auto 16px; }
+  .who .section-body { margin: 0 auto 52px; text-align: center; }
+  .who-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+  .who-card {
+    background: var(--white);
+    border-radius: 10px;
+    padding: 32px 28px;
+    text-align: left;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+  }
+  .who-card-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 10px;
+  }
+  .who-card-title {
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--charcoal);
+    margin-bottom: 10px;
+    line-height: 1.2;
+  }
+  .who-card-body {
+    font-size: 13.5px;
+    color: var(--mid);
+    font-weight: 300;
+    line-height: 1.65;
+  }
+
+  /* ── FOUNDER ── */
+  .founder {
+    padding: 112px 64px;
+    background: var(--charcoal);
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 80px;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .founder::before {
+    content: '';
+    position: absolute;
+    top: -100px; left: -100px;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(232,97,10,0.1) 0%, transparent 70%);
+  }
+  .founder-left { position: relative; z-index: 2; }
+  .founder .section-label { color: var(--amber-light); }
+  .founder .section-heading { color: var(--white); }
+  .founder-body {
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--stone);
+    line-height: 1.75;
+    margin-bottom: 16px;
+  }
+  .founder-body strong { color: var(--white); font-weight: 400; }
+  .founder-right { position: relative; z-index: 2; }
+  .founder-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .stat-block {
+    background: rgba(255,255,255,0.05);
+    padding: 32px 28px;
+  }
+  .stat-number {
+    font-family: var(--font-display);
+    font-size: 40px;
+    font-weight: 800;
+    color: var(--amber);
+    line-height: 1;
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+  }
+  .stat-label {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--stone);
+    line-height: 1.5;
+  }
+
+  /* ── CTA BAND ── */
+  .cta-band {
+    background: var(--amber);
+    padding: 80px 64px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+  }
+  .cta-band h2 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(26px, 3vw, 42px);
+    color: var(--charcoal);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    max-width: 520px;
+  }
+  .btn-primary {
+    display: inline-block;
+    background: var(--charcoal);
+    color: var(--white);
+    font-size: 15px;
+    font-weight: 500;
+    padding: 16px 36px;
+    border-radius: 4px;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.2s;
+  }
+  .btn-primary:hover { background: var(--slate); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--charcoal);
+    padding: 56px 64px 40px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+  .footer-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 48px;
+    gap: 40px;
+  }
+  .footer-logo {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 22px;
+    color: var(--white);
+    margin-bottom: 10px;
+    text-decoration: none;
+    display: block;
+  }
+  .footer-logo span { color: var(--amber); }
+  .footer-tagline {
+    font-size: 13px;
+    color: var(--stone);
+    font-weight: 300;
+    max-width: 240px;
+    line-height: 1.6;
+  }
+  .footer-links h4 {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--stone);
+    margin-bottom: 16px;
+    font-weight: 500;
+  }
+  .footer-links ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-links a {
+    font-size: 14px;
+    color: rgba(181,175,169,0.65);
+    text-decoration: none;
+    font-weight: 300;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--white); }
+  .footer-bottom {
+    padding-top: 28px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+  }
+  .footer-bottom p { font-size: 12px; color: rgba(181,175,169,0.35); font-weight: 300; }
+
+  /* ── FORM ── */
+  .field-group { display:flex; flex-direction:column; gap:7px; }
+  .field-label { font-size:12px; font-weight:500; letter-spacing:0.06em; color:var(--slate); text-transform:uppercase; }
+  .field-req { color:var(--amber); }
+  .field-input {
+    font-family:var(--font-body);
+    font-size:15px;
+    font-weight:300;
+    color:var(--charcoal);
+    background:var(--white);
+    border:1.5px solid rgba(0,0,0,0.1);
+    border-radius:6px;
+    padding:13px 16px;
+    outline:none;
+    transition:border-color 0.2s, box-shadow 0.2s;
+    width:100%;
+    -webkit-appearance:none;
+    appearance:none;
+  }
+  .field-input::placeholder { color:var(--stone); }
+  .field-input:focus { border-color:var(--amber); box-shadow:0 0 0 3px rgba(232,97,10,0.1); }
+  .field-textarea { min-height:140px; resize:vertical; }
+  .field-select {
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B6B6B' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;
+    background-position:right 16px center;
+    padding-right:40px;
+    cursor:pointer;
+  }
+  .form-submit {
+    font-family:var(--font-body);
+    font-size:15px;
+    font-weight:500;
+    color:var(--white);
+    background:var(--amber);
+    border:none;
+    border-radius:4px;
+    padding:14px 36px;
+    cursor:pointer;
+    transition:background 0.2s, transform 0.15s;
+    white-space:nowrap;
+  }
+  .form-submit:hover { background:var(--amber-deep); transform:translateY(-1px); }
+  @media (max-width:900px) {
+    .form-two-col { grid-template-columns:1fr !important; }
+    #contact { padding:72px 24px !important; }
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 0 24px; }
+    .nav-links { display: none; }
+    .hero { padding: 120px 24px 80px; }
+    .hero-services { grid-template-columns: 1fr; }
+    .cred-strip { grid-template-columns: 1fr 1fr; padding: 40px 24px; gap: 24px; }
+    .cred-item { padding: 0 0 24px; border-right: none; border-bottom: 1px solid rgba(0,0,0,0.07); }
+    .cred-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .sl1, .sl2-inner, .sl3, .founder { grid-template-columns: 1fr; padding: 72px 24px; gap: 48px; }
+    .sl2 { padding: 72px 24px; }
+    .sl2-pillars { grid-template-columns: 1fr; }
+    .who { padding: 72px 24px; }
+    .who-grid { grid-template-columns: 1fr; }
+    .cta-band { flex-direction: column; align-items: flex-start; padding: 56px 24px; }
+    footer { padding: 48px 24px 32px; }
+    .footer-top { flex-direction: column; gap: 32px; }
+    .footer-bottom { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo"><span>Talent</span> Ledger</a>
+  <ul class="nav-links">
+    <li><a href="/workforce-technology">Workforce Technology</a></li>
+    <li><a href="/business-advisory">Business Advisory</a></li>
+    <li><a href="/agency-growth">Agency Growth</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/insights">Insights</a></li>
+    <li><a href="/contact" class="nav-cta">Talk to us</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-label">Melbourne · Independent · Vendor-Agnostic</div>
+    <h1>Sharp advice.<br><em>No agenda.</em></h1>
+    <p class="hero-sub">
+      Talent Ledger is an independent advisory firm built on 25 years inside the workforce and recruitment industry.
+      <strong>Three service lines. One firm. Zero conflicts of interest.</strong>
+      Human expertise, AI-informed.
+    </p>
+
+    <!-- THREE SERVICE LINE CARDS -->
+    <div class="hero-services">
+      <a href="/workforce-technology" class="hero-service-card">
+        <div class="hsc-number">01</div>
+        <div class="hsc-title">Workforce & Recruitment Technology Advisory</div>
+        <div class="hsc-body">Vendor-agnostic technology selection, evaluation, and implementation advisory for mid-market organisations.</div>
+        <div class="hsc-link">Explore ›</div>
+      </a>
+      <a href="/business-advisory" class="hero-service-card">
+        <div class="hsc-number">02</div>
+        <div class="hsc-title">Business Advisory</div>
+        <div class="hsc-body">Helping SMEs get more from their sales and customer service talent — people, process, and the systems that connect them.</div>
+        <div class="hsc-link">Explore ›</div>
+      </a>
+      <a href="/agency-growth" class="hero-service-card">
+        <div class="hsc-number">03</div>
+        <div class="hsc-title">Agency Growth Advisory</div>
+        <div class="hsc-body">Built for recruitment firms ready to scale — systems, processes, team structure, and the commercial decisions that matter most.</div>
+        <div class="hsc-link">Explore ›</div>
+      </a>
+    </div>
+  </div>
+  <div class="hero-rule"></div>
+</section>
+
+<!-- CREDIBILITY STRIP -->
+<div class="cred-strip">
+  <div class="cred-item">
+    <div class="cred-number">25</div>
+    <div class="cred-label">Years hands-on in recruitment and workforce</div>
+  </div>
+  <div class="cred-item">
+    <div class="cred-number">10+</div>
+    <div class="cred-label">Industry sectors across white collar, trade and blue collar</div>
+  </div>
+  <div class="cred-item">
+    <div class="cred-number">15+</div>
+    <div class="cred-label">Years building and exiting a national recruitment firm</div>
+  </div>
+  <div class="cred-item">
+    <div class="cred-number">0</div>
+    <div class="cred-label">Vendor relationships, referral fees or hidden conflicts</div>
+  </div>
+</div>
+
+<!-- SERVICE LINE 1: WORKFORCE & RECRUITMENT TECHNOLOGY -->
+<section class="sl1">
+  <div class="sl1-left">
+    <div class="section-label">Service Line 01</div>
+    <h2 class="section-heading">Workforce & Recruitment Technology Advisory</h2>
+    <p class="section-body">Mid-market organisations face the same technology decisions as enterprise — without the internal resources to evaluate them properly. We run a structured, vendor-agnostic process so you choose the right tool, not the one with the biggest referral fee. That includes cutting through the noise on AI — separating genuine capability from roadmap promises dressed up as features.</p>
+    <a href="/workforce-technology" class="link-arrow">See what's included →</a>
+  </div>
+  <div class="sl1-cards">
+    <div class="sl1-card">
+      <div class="sl1-card-num">—</div>
+      <div>
+        <div class="sl1-card-title">Technology Selection & Evaluation</div>
+        <div class="sl1-card-body">ATS, VMS, RPO, payroll — structured shortlisting with no vendor bias. Diagnostic, brief, market scan, scoring, recommendation.</div>
+      </div>
+    </div>
+    <div class="sl1-card">
+      <div class="sl1-card-num">—</div>
+      <div>
+        <div class="sl1-card-title">Recruitment Function Design</div>
+        <div class="sl1-card-body">Build or rebuild your internal recruitment capability. Operating model, team structure, process design, and tech stack — done in the right order.</div>
+      </div>
+    </div>
+    <div class="sl1-card">
+      <div class="sl1-card-num">—</div>
+      <div>
+        <div class="sl1-card-title">Contingent Workforce Strategy</div>
+        <div class="sl1-card-body">Rationalise your labour hire and contractor supply chain. Reduce cost, reduce risk, remove the hidden conflicts in your current arrangements.</div>
+      </div>
+    </div>
+    <div class="sl1-card">
+      <div class="sl1-card-num">—</div>
+      <div>
+        <div class="sl1-card-title">Current State Diagnostic</div>
+        <div class="sl1-card-body">Not sure where to start? A structured review of people, process, and technology — with a clear view of what to fix and in what order.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE LINE 2: BUSINESS ADVISORY -->
+<section class="sl2">
+  <div class="sl2-inner">
+    <div>
+      <div class="section-label">Service Line 02</div>
+      <h2 class="section-heading">Business Advisory</h2>
+      <p class="section-body">For SMEs that know their sales and customer service teams aren't performing at their ceiling — but aren't sure whether it's a people problem, a process problem, or a systems problem. Usually, it's all three.</p>
+      <a href="/business-advisory" class="link-arrow">See what's included →</a>
+    </div>
+    <div class="sl2-pillars">
+      <div class="sl2-pillar">
+        <div class="sl2-pillar-icon">◈</div>
+        <div class="sl2-pillar-title">Sales Performance</div>
+        <div class="sl2-pillar-body">Pipeline discipline, conversion review, team structure, and the honest conversation about what's actually holding revenue back.</div>
+      </div>
+      <div class="sl2-pillar">
+        <div class="sl2-pillar-icon">◈</div>
+        <div class="sl2-pillar-title">Customer Service</div>
+        <div class="sl2-pillar-body">Service standards, team capability, and the systems that sit underneath them — designed around your actual customer journey.</div>
+      </div>
+      <div class="sl2-pillar">
+        <div class="sl2-pillar-icon">◈</div>
+        <div class="sl2-pillar-title">Talent & Team</div>
+        <div class="sl2-pillar-body">Getting the right people in the right roles, with a clear picture of what good looks like for your business specifically.</div>
+      </div>
+      <div class="sl2-pillar">
+        <div class="sl2-pillar-icon">◈</div>
+        <div class="sl2-pillar-title">Process & Systems</div>
+        <div class="sl2-pillar-body">Remove the friction between your team and their results — including where AI can genuinely improve your workflows, and where it can't.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE LINE 3: AGENCY GROWTH ADVISORY -->
+<section class="sl3">
+  <div>
+    <div class="section-label">Service Line 03</div>
+    <h2 class="section-heading">Agency Growth Advisory</h2>
+    <p class="section-body">Built specifically for recruitment firms that are growing — and starting to feel the strain. The systems and processes that got you to this point won't get you to the next one. We've built it before. We know exactly where the gaps appear — including how to assess AI tools honestly, so you improve consultant productivity without introducing risk your business isn't ready to carry.</p>
+    <a href="/agency-growth" class="link-arrow">See what's included →</a>
+  </div>
+  <div class="sl3-right">
+    <div class="sl3-checklist">
+      <div class="sl3-check">
+        <div class="sl3-check-mark">✓</div>
+        <div>
+          <div class="sl3-check-title">Systems & Technology Audit</div>
+          <div class="sl3-check-body">CRM, ATS, job boards, payroll — mapped against where you're heading. Including an honest assessment of AI hiring tools: what improves consultant output and what introduces compliance exposure.</div>
+        </div>
+      </div>
+      <div class="sl3-check">
+        <div class="sl3-check-mark">✓</div>
+        <div>
+          <div class="sl3-check-title">Process Design & Documentation</div>
+          <div class="sl3-check-body">Formalise what's working. Fix what isn't. Build the playbook that lets you hire without everything breaking.</div>
+        </div>
+      </div>
+      <div class="sl3-check">
+        <div class="sl3-check-mark">✓</div>
+        <div>
+          <div class="sl3-check-title">Team Structure & Coaching</div>
+          <div class="sl3-check-body">Consultant performance, billing structure, leadership development, and the culture conversations that matter as you scale.</div>
+        </div>
+      </div>
+      <div class="sl3-check">
+        <div class="sl3-check-mark">✓</div>
+        <div>
+          <div class="sl3-check-title">Commercial & Growth Strategy</div>
+          <div class="sl3-check-body">Sector focus, margin discipline, client mix, and the strategic decisions that compound over time.</div>
+        </div>
+      </div>
+      <div class="sl3-check">
+        <div class="sl3-check-mark">✓</div>
+        <div>
+          <div class="sl3-check-title">Founder Advisory</div>
+          <div class="sl3-check-body">A confidential sounding board for the decisions you can't easily talk through with your team.</div>
+        </div>
+      </div>
+      <div class="sl3-check">
+        <div class="sl3-check-mark">✓</div>
+        <div>
+          <div class="sl3-check-title">Safety & Compliance</div>
+          <div class="sl3-check-body">OHS systems, recruitment compliance frameworks, and contractor obligations — built properly from the ground up so they protect your business as it scales.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO WE WORK WITH -->
+<section class="who">
+  <div class="section-label" style="text-align:center;">Who we work with</div>
+  <h2 class="section-heading">Three audiences.<br>One standard of advice.</h2>
+  <p class="section-body">Independent. Commercially grounded. Human expertise, AI-informed. Built on experience that spans every level of the workforce and recruitment industry.</p>
+  <div class="who-grid">
+    <div class="who-card">
+      <div class="who-card-label">Service Line 01</div>
+      <div class="who-card-title">Mid-market organisations</div>
+      <div class="who-card-body">CFOs, GMs, and People leaders navigating workforce technology decisions without a dedicated internal team to evaluate them properly.</div>
+    </div>
+    <div class="who-card">
+      <div class="who-card-label">Service Line 02</div>
+      <div class="who-card-title">SME business owners</div>
+      <div class="who-card-body">Founders and operators who know their sales or customer service function has a ceiling — and want a clear view of why and what to do about it.</div>
+    </div>
+    <div class="who-card">
+      <div class="who-card-label">Service Line 03</div>
+      <div class="who-card-title">Recruitment firm founders</div>
+      <div class="who-card-body">Agency owners who've built something worth protecting and are ready to put the right foundations underneath it to scale sustainably.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOUNDER -->
+<section class="founder">
+  <div class="founder-left">
+    <div class="section-label">Who's behind this</div>
+    <h2 class="section-heading">Built by someone who's actually done it.</h2>
+    <p class="founder-body">25 years inside the recruitment industry — not observing from a distance. From <strong>entry-level placements to C-suite appointments</strong>, contract labour hire to specialist degree-qualified roles, across 10+ sectors.</p>
+    <p class="founder-body">That experience culminated in <strong>co-founding a national recruitment firm</strong> — built over 15 years and exited via share sale. The kind of outcome that only comes from understanding how workforce supply chains actually work, commercially and operationally.</p>
+    <p class="founder-body">Talent Ledger is what that experience looks like when it's working entirely for you.</p>
+    <a href="/about" class="link-arrow" style="color: var(--amber-light);">Read the full story →</a>
+  </div>
+  <div class="founder-right">
+    <div class="founder-stats">
+      <div class="stat-block">
+        <div class="stat-number">25</div>
+        <div class="stat-label">Years in recruitment and workforce</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-number">10+</div>
+        <div class="stat-label">Industry sectors covered</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-number">15+</div>
+        <div class="stat-label">Years building a national firm</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-number">0</div>
+        <div class="stat-label">Vendor fees or referral commissions</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<div class="cta-band">
+  <h2>Not sure which service line fits? Let's work it out together.</h2>
+  <a href="/contact" class="btn-primary">Talk to us</a>
+</div>
+
+<!-- CONTACT FORM -->
+<section id="contact" style="padding:112px 64px;background:var(--fog);">
+  <div style="max-width:700px;margin:0 auto;">
+    <div class="section-label" style="text-align:center;">Get in touch</div>
+    <h2 class="section-heading" style="text-align:center;margin-bottom:14px;">Not sure where to start?<br>Start here.</h2>
+    <p style="text-align:center;font-size:16px;font-weight:300;color:var(--mid);line-height:1.7;margin-bottom:52px;max-width:460px;margin-left:auto;margin-right:auto;">Tell us a little about what you are working on and we will come back to you within one business day.</p>
+
+    <div id="form-wrap">
+      <form id="enquiry-form" action="https://formspree.io/f/mrevwdjw" method="POST" style="display:flex;flex-direction:column;gap:20px;">
+        <input type="hidden" name="_next" value="https://talentledger.com.au/thanks">
+        <input type="hidden" name="_gotcha" style="display:none">
+
+        <div class="form-two-col" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+          <div class="field-group">
+            <label class="field-label">First name <span class="field-req">*</span></label>
+            <input type="text" name="first_name" class="field-input" placeholder="Jane" required>
+          </div>
+          <div class="field-group">
+            <label class="field-label">Last name <span class="field-req">*</span></label>
+            <input type="text" name="last_name" class="field-input" placeholder="Smith" required>
+          </div>
+        </div>
+
+        <div class="form-two-col" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+          <div class="field-group">
+            <label class="field-label">Email address <span class="field-req">*</span></label>
+            <input type="email" name="email" class="field-input" placeholder="jane@company.com.au" required>
+          </div>
+          <div class="field-group">
+            <label class="field-label">Phone number</label>
+            <input type="tel" name="phone" class="field-input" placeholder="04XX XXX XXX">
+          </div>
+        </div>
+
+        <div class="form-two-col" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+          <div class="field-group">
+            <label class="field-label">Company</label>
+            <input type="text" name="company" class="field-input" placeholder="Your organisation">
+          </div>
+          <div class="field-group">
+            <label class="field-label">Your role</label>
+            <input type="text" name="role" class="field-input" placeholder="e.g. General Manager">
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label">Which service are you interested in? <span class="field-req">*</span></label>
+          <select name="service" class="field-input field-select" required>
+            <option value="" disabled selected>Select a service line</option>
+            <option value="workforce-technology">Workforce &amp; Recruitment Technology Advisory</option>
+            <option value="business-advisory">Business Advisory</option>
+            <option value="agency-growth">Agency Growth Advisory</option>
+            <option value="not-sure">Not sure yet — happy to discuss</option>
+          </select>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label">What are you working on? <span class="field-req">*</span></label>
+          <textarea name="message" class="field-input field-textarea" placeholder="Give us a brief overview — no need to have it all figured out yet." required></textarea>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label">How did you hear about us?</label>
+          <select name="referral" class="field-input field-select">
+            <option value="" disabled selected>Select one</option>
+            <option value="linkedin">LinkedIn</option>
+            <option value="referral">Referral / word of mouth</option>
+            <option value="google">Google search</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-top:8px;">
+          <p style="font-size:12px;color:var(--stone);font-weight:300;max-width:320px;line-height:1.6;">We respond within one business day. Your information is never shared with third parties.</p>
+          <button type="submit" class="form-submit">Send enquiry →</button>
+        </div>
+
+      </form>
+    </div>
+
+    <div id="form-success" style="display:none;background:var(--white);border-left:4px solid var(--amber);padding:28px 32px;border-radius:8px;box-shadow:0 2px 16px rgba(0,0,0,0.06);">
+      <p style="font-family:var(--font-display);font-weight:700;font-size:20px;color:var(--charcoal);margin-bottom:8px;">Thanks — we will be in touch shortly.</p>
+      <p style="font-size:15px;color:var(--mid);font-weight:300;line-height:1.65;">Expect a response within one business day. In the meantime, feel free to connect on <a href="https://linkedin.com" style="color:var(--amber);">LinkedIn</a>.</p>
+    </div>
+
+  </div>
+</section>
+
+
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <a href="/" class="footer-logo"><span>Talent</span> Ledger</a>
+      <p class="footer-tagline">Independent workforce, business and agency advisory. Melbourne, Australia.</p>
+    </div>
+    <div class="footer-links">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="/workforce-technology">Workforce Technology</a></li>
+        <li><a href="/business-advisory">Business Advisory</a></li>
+        <li><a href="/agency-growth">Agency Growth</a></li>
+      </ul>
+    </div>
+    <div class="footer-links">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="/about">About</a></li>
+        <li><a href="/insights">Insights</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-links">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="mailto:matt@talentledger.com.au">matt@talentledger.com.au</a></li>
+        <li><a href="https://www.linkedin.com/company/talentledger" target="_blank">LinkedIn</a></li>
+        <li><a href="https://talentledger.com.au">talentledger.com.au</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Talent Ledger. All rights reserved.</p>
+    <p>Melbourne, Victoria, Australia</p>
+  </div>
+</footer>
+
+</body>
+</html>
